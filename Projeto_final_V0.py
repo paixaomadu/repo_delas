@@ -45,8 +45,16 @@ df_consultas_espera = df_consultas.loc[df_consultas['status'] == 'Realizada'].co
 df_consultas_espera['Tempo_de_espera(min)'] = ((df_consultas_espera['data_hora_inicio'] - df_consultas_espera['data_hora_agendada']).dt.total_seconds() / 60)
 
 
+# Média e mediana por Especialidade
+
+#pergunta: como eu faço a media e mediana por especialidade? 
+df_espec= df_medico.groupby('especialidade')['tempo_medio_atendimento'].mean().reset_index()
 
 
+#Calculo de medidas de tendencias centrais 
 
+media_espec = np.mean(df_medico['tempo_medio_atendimento'])
+mediana_espec = np.median(df_medico['tempo_medio_atendimento'])
+distancia_espec = ((media_espec - mediana_espec)/mediana_espec) *100
 
 
